@@ -1,0 +1,27 @@
+name: Build and Deploy to Production
+on:
+    push:
+        branches:
+            -   main
+jobs:
+    build:
+        name: 👨‍🏭 build
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@master
+            - name: Setup Enviroment
+              uses: shivammathur/setup-php@v2
+              with:
+                php-version: '8.0'
+            - name: Speed up the packages installation process
+              run: composer global require hirak/prestissimo
+            - name: Install Packages
+              run: composer install --no-dev
+            - name: 🚀 Deploy
+              uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+              with:
+                server: ftp.atutracer.net
+                username: ${{ secrets.FTP_PRODUCTION }}
+                password: ${{ secrets.FTP_PASSWORD }}
+      
