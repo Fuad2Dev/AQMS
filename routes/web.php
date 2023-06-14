@@ -19,7 +19,6 @@ Route::get('/', function () {
 
 
 // Auth
-
 Route::get('/login', 'App\Http\Controllers\AuthController@showLogin')->name('login');
 Route::put('/login', 'App\Http\Controllers\AuthController@showLogin');
 Route::post('/login', 'App\Http\Controllers\AuthController@logIn');
@@ -29,16 +28,9 @@ Route::post('/register', 'App\Http\Controllers\AuthController@register');
 Route::get('/forgotpassword', '\App\Http\Controllers\AuthController@showForgetPassword')->name('forgot-password');
 Route::post('/logout', '\App\Http\Controllers\AuthController@logout')->name('logout');
 
-//Auth for Admin
-// Route::get('/admin-login', 'App\Http\Controllers\AuthController@showAdminLogin')->name('admin-login');
-// Route::post('/admin-login', '\App\Http\Controllers\AuthController@admin-login')->name('admin-login');
-// Route::get('/admin-register', '\App\Http\Controllers\AuthController@showAdminRegister')->name('admin-register');
-// Route::post('/admin-register', '\App\Http\Controllers\AuthController@admin-register')->name('admin-register');
-
 Route::middleware('checkExpired')->group(function () {
 
     // Dashboard
-    // index
     Route::get('/dashboard', '\App\Http\Controllers\DashboardController@index')->name('dashboard.index');
     // survey
     Route::post('/dashboard/survey/test', '\App\Http\Controllers\DashboardController@testData')->name('dashboard.test');
@@ -63,18 +55,8 @@ Route::middleware('checkExpired')->group(function () {
     Route::get('/dashboard/users', '\App\Http\Controllers\DashboardController@users')->name('users.index');
     // analytics
     Route::get('/dashboard/analytics', '\App\Http\Controllers\DashboardController@analytics')->name('analytics.index');
-    //     // survey level analysis - gender
-    // Route::get('/dashboard/survey-level-analysis', '\App\Http\Controllers\DashboardController@gender')->name('analysis.gender');
-    //     // survey level analysis - departments
-    // Route::get('/dashboard/survey-level-analysis', '\App\Http\Controllers\DashboardController@sessions')->name('analytics.sessions');
-    //     // survey level analysis - sessions
-    // Route::get('/dashboard/survey-level-analysis', '\App\Http\Controllers\DashboardController@departments')->name('analytics.departments');
-
-
-
 
     // Alumus
-    // index
     Route::get('/home', '\App\Http\Controllers\AlumnusController@index')->name('home');
     // surveys
     Route::get('/home/surveys/{i}', '\App\Http\Controllers\AlumnusController@showsurvey')->name('alumnus.survey.show');
